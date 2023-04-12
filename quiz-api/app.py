@@ -22,3 +22,28 @@ def GetQuizInfo():
 if __name__ == "__main__":
     app.run() # DOIT TOUJOURS ETRE A LA FIN
     
+    
+## LANCER VENV
+# source venv/Scripts/activate
+
+
+######################################## DOCKER ########################################
+## CREER UNE IMAGE DOCKER 
+# docker image build -t quiz-local-api .
+# docker container run -it --rm -p 5000:5000 --name quiz-local-api quiz-local-api
+
+## SUPPRIMER D'ANCIEN CONTAINER
+# docker container ls -a
+# docker container rm <nom-ou-id-des-containers>
+
+## SUPPRIMER D'ANCIENNE IMAGE
+# docker image ls
+# docker image rm <nom-ou-id-des-images>
+
+## SUPPRIMER UNE IMAGE ORPHELINE
+# docker image prune
+
+
+######################################## GIT ########################################
+#
+#
