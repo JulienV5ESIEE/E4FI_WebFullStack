@@ -1,12 +1,13 @@
 <template>
   <div>
     <h1>Home page</h1>
+    <p>Hey :)</p>
 
     <div v-for="scoreEntry in registeredScores" v-bind:key="scoreEntry.date">
       {{ scoreEntry.playerName }} - {{ scoreEntry.score }}
     </div>
 
-    <router-link to="/start-new-quiz-page">Démarrer le quiz !</router-link>
+    <router-link to="/new-quiz">Démarrer le quiz !</router-link>
   </div>
 </template>
 
