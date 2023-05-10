@@ -1,35 +1,93 @@
 @import './base.css';
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
 
-  font-weight: normal;
+.navbar
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
+.navbar a
+{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--color-black);
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+.navbar nav
+{
+  display: inline-flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .navbar, .navbar nav
+  {
+    flex-direction: column;
   }
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
-}
+/***** START BUTTON *****/
+
+button.start {
+  position: relative;
+  height: 50px;
+  padding: 0 30px;
+  border: 2px solid #000;
+  background: #e8e8e8;
+  user-select: none;
+  white-space: nowrap;
+  transition: all .05s linear;
+  font-family: inherit;
+ }
+ 
+ button.start:before, button.start:after {
+  content: "";
+  position: absolute;
+  background: #e8e8e8;
+  transition: all .2s linear;
+ }
+ 
+ button.start:before {
+  width: calc(100% + 6px);
+  height: calc(100% - 16px);
+  top: 8px;
+  left: -3px;
+ }
+ 
+ button.start:after {
+  width: calc(100% - 16px);
+  height: calc(100% + 6px);
+  top: -3px;
+  left: 8px;
+ }
+ 
+ button.start:hover, button.start a:hover {
+  cursor: crosshair;
+ }
+ 
+ button.start:active {
+  transform: scale(0.95);
+ }
+ 
+ button.start:hover:before {
+  height: calc(100% - 32px);
+  top: 16px;
+ }
+ 
+ button.start:hover:after {
+  width: calc(100% - 32px);
+  left: 16px;
+ }
+ 
+ button.start p {
+  font-size: 15px;
+  z-index: 3;
+  position: relative;
+  font-weight: 600;
+  color: var(--color-black);
+ }
