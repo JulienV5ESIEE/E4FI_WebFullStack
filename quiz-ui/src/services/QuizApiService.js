@@ -1,5 +1,5 @@
 import axios from "axios";
-import participationStorageService from "@/Services/ParticipationStorageService";
+import participationStorageService from "@/services/ParticipationStorageService";
 
 const instance = axios.create({
   baseURL: `${import.meta.env.VITE_API_URL}`,

@@ -19,7 +19,7 @@
           Image de la question:
           <input type="file" accept="image/*" @change="handleImageUpload">
         </label>
-        <img v-if="question.imagePreview" :src="question.imagePreview" alt="Image de prévisualisation">
+        <img class="prevuImg" v-if="question.imagePreview" :src="question.imagePreview" alt="Image de prévisualisation">
         <h3>Réponses possibles:</h3>
         <ul class="possibleAnswers">
           <li v-for="answer in question.possibleAnswers" :key="answer.id">
@@ -49,8 +49,8 @@
 </template>
 
 <script>
-import QuizApiService from "@/Services/QuizApiService.js";
-import participationStorageService from "@/Services/ParticipationStorageService";
+import QuizApiService from "@/services/QuizApiService.js";
+import participationStorageService from "@/services/ParticipationStorageService";
 
 export default {
   data() {

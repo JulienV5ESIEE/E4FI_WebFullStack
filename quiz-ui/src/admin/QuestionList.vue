@@ -8,11 +8,13 @@
             <thead>
             <tr>
               <th>Question</th>
+              <th>Position</th>
             </tr>
             </thead>
             <tbody v-if="questions.length">
               <tr v-for="question in questions" :key="question.id">
-                <td><RouterLink :to="'/admin/questions/' + question.id">{{ question.title }}</RouterLink></td>
+                <td><RouterLink :to="'/admin/questions/' + question.id">{{ question.text }}</RouterLink></td>
+                <td>{{ question.position }}</td>
               </tr>
             </tbody>
             <div v-else>
@@ -38,7 +40,7 @@
 </template>
   
   <script>
-  import QuizApiService from "@/Services/QuizApiService.js";
+  import QuizApiService from "@/services/QuizApiService.js";
   import '@/assets/bundles/tables/datatables.min.js'
   import '@/assets/bundles/tables/datatables.min.css'
   
@@ -63,7 +65,7 @@
                   url: "src/assets/bundles/tables/french.json"
               },
               scrollY: 200,
-              } );
+              order: [[ 1, "asc" ]] } );
         });
 
         } catch (error) {

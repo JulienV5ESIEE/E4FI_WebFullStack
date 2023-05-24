@@ -70,7 +70,7 @@
 
 <script>
 import quizApiService from "@/services/QuizApiService";
-import participationStorageService from "@/Services/ParticipationStorageService";
+import participationStorageService from "@/services/ParticipationStorageService";
 
 export default {
   name: "HomePage",

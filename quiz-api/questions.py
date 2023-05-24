@@ -161,9 +161,9 @@ def update_question(question_id, question_data):
                 else:
                     cursor.execute("UPDATE questions SET position = position - 1 WHERE id=?", (question[0],))
         
-            # On update la question en question
-            cursor.execute("UPDATE questions SET text=?, title=?, image=?, position = ? WHERE id=?", (
-                question_data['text'],question_data['title'],question_data['image'],question_data['position'],question_id,))
+        # On update la question en question
+        cursor.execute("UPDATE questions SET text=?, title=?, image=?, position = ? WHERE id=?", (
+            question_data['text'],question_data['title'],question_data['image'],question_data['position'],question_id,))
  
         cursor.execute('DELETE FROM possible_answers WHERE question_id=?', (question_id,))
         for answer in question_data['possibleAnswers']:

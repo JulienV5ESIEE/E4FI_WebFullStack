@@ -58,7 +58,7 @@ h3
 </style>
   
   <script>
-  import QuizApiService from "@/Services/QuizApiService.js";
+  import QuizApiService from "@/services/QuizApiService.js";
   
   export default {
     data() {

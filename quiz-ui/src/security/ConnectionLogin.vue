@@ -50,8 +50,8 @@
 </style>
   
 <script>
-  import QuizApiService from "@/Services/QuizApiService.js";
-  import participationStorageService from "@/Services/ParticipationStorageService";
+  import QuizApiService from "@/services/QuizApiService.js";
+  import participationStorageService from "@/services/ParticipationStorageService";
   export default {
     data() {
       return {

@@ -25,6 +25,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <script>
 
+
 window.addEventListener('resize', function() {
     var header = document.querySelector('header');
     var windowWidth = window.innerWidth;
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-import participationStorageService from "@/Services/ParticipationStorageService";
+import participationStorageService from "@/services/ParticipationStorageService";
 export default {
   name: 'App',
   props: {

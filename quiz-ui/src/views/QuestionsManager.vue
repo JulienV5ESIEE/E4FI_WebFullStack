@@ -66,8 +66,8 @@ h1
 
 <script>
 import QuestionDisplay from "./QuestionDisplay.vue";
-import participationStorageService from "@/Services/ParticipationStorageService";
-import QuizApiService from "@/Services/QuizApiService.js";
+import participationStorageService from "@/services/ParticipationStorageService";
+import QuizApiService from "@/services/QuizApiService.js";
 
 export default {
   components: {

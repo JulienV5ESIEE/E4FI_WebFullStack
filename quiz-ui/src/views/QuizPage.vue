@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import participationStorageService from "@/Services/ParticipationStorageService";
+import participationStorageService from "@/services/ParticipationStorageService";
 export default {
   name: 'NewQuizPage',
   data() {

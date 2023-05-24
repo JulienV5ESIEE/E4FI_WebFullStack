@@ -101,7 +101,7 @@
 import QuizApiService from "@/services/QuizApiService.js";
 import '@/assets/bundles/tables/datatables.min.js'
 import '@/assets/bundles/tables/datatables.min.css'
-import participationStorageService from "@/Services/ParticipationStorageService";
+import participationStorageService from "@/services/ParticipationStorageService";
 
 export default {
   name: "QuizResults",
