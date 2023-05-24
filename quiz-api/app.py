@@ -4,7 +4,7 @@ import datetime
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 from jwt_utils import secret, decode_token, build_token, JwtError
 from questions import Question, add_question, remove_question, remove_all_questions, get_question_by_id, get_question_by_position, update_question, get_all_questions
-from participations import participation_add, participation_remove_all
+from participations import participation_add, participation_remove_all, get_position_score
 # Permettre à votre application front-end d’effectuer des requêtes HTTP AJAX de type “cross-origin”
 from flask_cors import CORS
 
@@ -78,6 +78,7 @@ def add_questions():
     current_user = get_jwt_identity()
     if current_user:
         question_data = request.get_json()
+        print(question_data, file=sys.stdout)
         try:
             question = Question(None, question_data['text'], question_data['title'],
                                 question_data['image'], question_data['position'], question_data['possibleAnswers'])
@@ -99,7 +100,7 @@ def get_questions(question_id):
 
 
 # UPDATE QUESTION
-@app.route('/questions/<question_id>', methods=['PUT'])
+@app.route('/questions/<int:question_id>', methods=['PUT'])
 @jwt_required(optional=True)
 def update_questions(question_id):
     current_user = get_jwt_identity()
@@ -108,6 +109,7 @@ def update_questions(question_id):
         try:
             question = Question(question_id, question_data['text'], question_data['title'],
                                 question_data['image'], question_data['position'], question_data['possibleAnswers'])
+            print(question.to_dict(), file=sys.stdout)
             result = update_question(question_id, question.to_dict())
             if result is None:
                 return jsonify({'error': 'Question not found'}), 404
@@ -147,9 +149,19 @@ def delete_question(question_id):
             return jsonify({'error': str(e)}), 500
     else:
         return jsonify(logged_in_as=current_user), 401
+    
+    
+# GET ALL QUESTIONS
+@app.route('/questions/get_all', methods=['GET'])
+def get_questions_all():
+    question = get_all_questions()
+    if question is None:
+        return jsonify({'error': 'Questions not found'}), 404
+    return question, 200
+    
+    
 
 # REMOVE ALL QUESTIONS
-
 
 @app.route('/questions/all', methods=['DELETE'])
 @jwt_required(optional=True)
@@ -201,7 +213,7 @@ def remove_all_participations():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
+# LOGIN
 @app.route('/login', methods=['POST'])
 def login():
     payload = request.get_json()
@@ -212,6 +224,7 @@ def login():
         return jsonify({'token': token}), 200
     else:
         return jsonify({'error': 'Invalid password'}), 401
+
 
 
 if __name__ == "__main__":
@@ -239,7 +252,6 @@ if __name__ == "__main__":
 
 # SUPPRIMER UNE IMAGE ORPHELINE
 # docker image prune
-
 
 ######################################## GIT ########################################
 # git add .

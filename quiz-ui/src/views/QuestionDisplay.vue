@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <p>{{ question.text }}</p>
-    <img v-if="question.image" :src="question.image" />
-    <ul>
-      <li v-for="(answer, index) in question.answers" :key="index">
-        <a @click="$emit('answer-selected', index)">{{ answer }}</a>
-      </li>
-    </ul>
-  </div>
+    <div v-if="question" class="question">
+      <p v-if="question.title" class="questiontext">{{ question.title }}</p>
+      <p v-if="question.text" class="questiontext">{{ question.text }}</p>
+      <ul class="listanswers">
+        <li @click="$emit('answer-selected', index)" v-for="(answer, index) in question.possibleAnswers" :key="index">
+          <a>{{ answer.text }}</a>
+        </li>
+      </ul>
+    </div>
+    <div v-else>
+      Chargement des questions...
+    </div>
 </template>
-
 
 <script>
 export default {
@@ -19,6 +21,6 @@ export default {
       type: Object
     }
   },
-  emits: ['answer-selected']
+  emits: ['answer-selected'],
 };
 </script>

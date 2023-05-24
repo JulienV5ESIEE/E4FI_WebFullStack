@@ -43,6 +43,7 @@ class PossibleAnswer:
 def add_question(question):
     connection = sqlite3.connect('quiz.db')
     cursor = connection.cursor()
+    print(question, file=sys.stdout)
     
     # Vérifier si la position est déjà prise
     cursor.execute("SELECT COUNT(*) FROM questions WHERE position=?", (question['position'],))
@@ -137,7 +138,7 @@ def get_question_by_position(position):
 def update_question(question_id, question_data):
     connection = sqlite3.connect('quiz.db')
     cursor = connection.cursor()
-    cursor.execute('SELECT * FROM questions WHERE position=?', (question_id,))
+    cursor.execute('SELECT * FROM questions WHERE id=?', (question_id,))
     existing_question = cursor.fetchone()
     if existing_question is not None:
         question_position = int(existing_question[4])
@@ -164,10 +165,13 @@ def update_question(question_id, question_data):
             cursor.execute("UPDATE questions SET text=?, title=?, image=?, position = ? WHERE id=?", (
                 question_data['text'],question_data['title'],question_data['image'],question_data['position'],question_id,))
  
-        cursor.execute('DELETE FROM possible_answers WHERE question_id=?', (question_position,))
+        cursor.execute('DELETE FROM possible_answers WHERE question_id=?', (question_id,))
         for answer in question_data['possibleAnswers']:
+            print(answer['text'], file=sys.stdout)
+            print(answer['isCorrect'], file=sys.stdout)
+            print(question_id, file=sys.stdout)
             cursor.execute('INSERT INTO possible_answers (text, isCorrect, question_id) VALUES (?, ?, ?)', (
-                answer['text'], answer['isCorrect'], question_position))
+                answer['text'], answer['isCorrect'], question_id))
         
         connection.commit()
         connection.close()
@@ -180,26 +184,30 @@ def update_question(question_id, question_data):
 def get_all_questions():
     connection = sqlite3.connect('quiz.db')
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM questions ORDER BY position ASC")
-    all_questions = cursor.fetchall()
-    questions = []
-    for question in all_questions:
-        cursor.execute("SELECT * FROM possible_answers WHERE question_id=?", (question[0],))
-        possible_answers = cursor.fetchall()
-        possible_answers_list = []
-        for answer in possible_answers:
-            possible_answers_list.append({
-                'id': answer[0],
-                'text': answer[1],
-                'isCorrect': answer[2]
+    try:
+        cursor.execute("SELECT * FROM questions ORDER BY position ASC")
+        all_questions = cursor.fetchall()
+        questions = []
+        for question in all_questions:
+            cursor.execute("SELECT * FROM possible_answers WHERE question_id=?", (question[0],))
+            possible_answers = cursor.fetchall()
+            possible_answers_list = []
+            for answer in possible_answers:
+                possible_answers_list.append({
+                    'id': answer[0],
+                    'text': answer[1],
+                    'isCorrect': answer[2]
+                })
+            questions.append({
+                'id': question[0],
+                'text': question[1],
+                'title': question[2],
+                'image': question[3],
+                'position': question[4],
+                'possibleAnswers': possible_answers_list
             })
-        questions.append({
-            'id': question[0],
-            'text': question[1],
-            'title': question[2],
-            'image': question[3],
-            'position': question[4],
-            'possibleAnswers': possible_answers_list
-        })
-    connection.close()
+    except Exception as e:
+        raise e
+    finally:
+        connection.close()
     return questions

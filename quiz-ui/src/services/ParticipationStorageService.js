@@ -18,5 +18,14 @@ export default {
   getParticipationScore() {
     // Récupère le score de participation stocké dans le local storage sous la clé "participationScore"
     return window.localStorage.getItem("participationScore");
+  },
+  saveToken(token) {
+    window.localStorage.setItem("token", token);
+  },
+  resetToken() {
+    window.localStorage.setItem("token", "");
+  },
+  getToken() {
+    return window.localStorage.getItem("token");
   }
 };
