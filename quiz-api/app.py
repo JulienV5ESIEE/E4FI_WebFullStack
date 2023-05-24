@@ -5,7 +5,6 @@ from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_requir
 from jwt_utils import secret, decode_token, build_token, JwtError
 from questions import Question, add_question, remove_question, remove_all_questions, get_question_by_id, get_question_by_position, update_question, get_all_questions
 from participations import participation_add, participation_remove_all, get_position_score
-# Permettre à votre application front-end d’effectuer des requêtes HTTP AJAX de type “cross-origin”
 from flask_cors import CORS
 
 app = Flask(__name__)
