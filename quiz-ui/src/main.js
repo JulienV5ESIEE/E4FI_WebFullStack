@@ -4,6 +4,7 @@ import router from './router'
 
 import './assets/css/main.css'
 import './assets/css/newquiz.css'
+import './assets/bundles/tables/datatables.min.css'
 
 const app = createApp(App)
 

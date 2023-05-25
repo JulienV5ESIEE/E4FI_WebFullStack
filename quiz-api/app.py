@@ -240,6 +240,7 @@ if __name__ == "__main__":
 # CREER UNE IMAGE DOCKER
 # docker image build -t quiz-local-api .
 # docker container run -it --rm -p 5000:5000 --name quiz-local-api quiz-local-api
+# docker container run -it --rm -p 3000:3000 --name quiz-local-ui quiz-local-ui
 
 # SUPPRIMER D'ANCIEN CONTAINER
 # docker container ls -a

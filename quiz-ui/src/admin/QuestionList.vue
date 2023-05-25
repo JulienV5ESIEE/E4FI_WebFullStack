@@ -41,8 +41,6 @@
   
   <script>
   import QuizApiService from "@/services/QuizApiService.js";
-  import '@/assets/bundles/tables/datatables.min.js'
-  import '@/assets/bundles/tables/datatables.min.css'
   
   export default {
     data() {
@@ -59,10 +57,11 @@
           const response = await QuizApiService.getQuestions();
           this.questions = response.data;
 
+          
           $(document).ready(function () {
-          $('#table').DataTable({
+            $('#table').DataTable({
               language: {
-                  url: "src/assets/bundles/tables/french.json"
+                  url: "https://cdn.datatables.net/plug-ins/505bef35b56/i18n/French.json"
               },
               scrollY: 200,
               order: [[ 1, "asc" ]] } );
